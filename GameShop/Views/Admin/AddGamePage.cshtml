@@ -1,0 +1,47 @@
+﻿@model Game
+
+@{
+    ViewData["Title"] = "Add Game";
+}
+
+<h2>Add Game</h2>
+
+<form asp-action="AddGame" method="post">
+    <div class="form-group">
+        <label asp-for="@Model.Name"></label>
+        <input asp-for="@Model.Name" class="form-control" />
+        <span asp-validation-for="@Model.Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.Developer"></label>
+        <input asp-for="@Model.Developer" class="form-control" />
+        <span asp-validation-for="@Model.Developer" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.Price"></label>
+        <input asp-for="@Model.Price" class="form-control" />
+        <span asp-validation-for="@Model.Price" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.Genre"></label>
+        <input asp-for="@Model.Genre" class="form-control" />
+        <span asp-validation-for="@Model.Genre" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.RealeseDate"></label>
+        <input asp-for="@Model.RealeseDate" class="form-control" />
+        <span asp-validation-for="@Model.RealeseDate" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.ImageUrl"></label>
+        <input asp-for="@Model.ImageUrl" class="form-control" />
+        <span asp-validation-for="@Model.ImageUrl" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add Game</button>
+</form>
