@@ -1,0 +1,77 @@
+﻿@model List<Game>
+
+<h2>Games List</h2>
+
+<div class="row mb-3">
+    <div class="col">
+        <a asp-controller="Home" asp-action="Index" class="btn btn-primary">Home</a>
+        <a asp-controller="Admin" asp-action="AdminPage" class="btn btn-danger">Admin Panel</a>
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Developer</th>
+            <th>Genre</th>
+            <th>Release Date</th>
+            <th>Price</th>
+            <th>Image</th>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <th>Add to Cart</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var game in Model)
+        {
+            <tr>
+                <td>@game.Id</td>
+                <td>@game.Name</td>
+                <td>@game.Developer</td>
+                <td>@game.Genre</td>
+                <td>@game.RealeseDate.ToShortDateString()</td>
+                <td>@game.Price.ToString("C")</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(game.ImageUrl))
+                    {
+                        <img src="@game.ImageUrl" alt="Game Image" style="max-width: 100px; max-height: 100px;" />
+                    }
+                    else
+                    {
+                        <span>No Image</span>
+                    }
+                </td>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <td>
+                        <form method="post" asp-controller="Cart" asp-action="AddToCart">
+                            <input type="hidden" name="gameId" value="@game.Id" />
+                            <button type="submit">Add to Cart</button>
+                        </form>
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <p>Welcome, @User.Identity.Name!</p>
+        <form method="post" asp-controller="Account" asp-action="Logout">
+            <button type="submit">Logout</button>
+        </form>
+        <a asp-controller="Cart" asp-action="Index">Cart</a>
+    }
+    else
+    {
+        <p>You are not logged in. Please log in or register.</p>
+        <a asp-controller="Account" asp-action="Login">Login</a>
+        <a asp-controller="Account" asp-action="Register">Register</a>
+    }
+</div>

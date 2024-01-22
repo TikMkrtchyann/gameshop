@@ -1,0 +1,32 @@
+﻿@model List<Cart>
+
+<h2>Your Cart</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Game Name</th>
+            <th>Count</th>
+            <th>Price</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var cartItem in Model)
+        {
+            <tr>
+                <td>@cartItem.Id</td>
+                <td>@cartItem.GameId</td>
+                <td>@cartItem.UserId</td>
+                <td>@cartItem.Count</td>
+                @* <td>@cartItem.Game.Price.ToString("C")</td>
+                <td>@(cartItem.Count * cartItem.Game.Price).ToString("C")</td> *@
+            </tr>
+        }
+    </tbody>
+</table>
+
+@* <div>
+    <p>Total Price: @Model.Sum(c => c.Count * c.Game.Price).ToString("C")</p>
+</div> *@
